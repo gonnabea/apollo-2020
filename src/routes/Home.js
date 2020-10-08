@@ -12,7 +12,7 @@ const GET_MOVIES = gql`
 `
 
 export default () => {
-  const { loading } = useQuery(GET_MOVIES)
-  console.log(loading)
-  return <h1>Home</h1>
+  const { loading, error, data } = useQuery(GET_MOVIES)
+  console.log(loading, error, data)
+  return loading ? <h2>로딩중...</h2> : data.movies.map((movie) => <h2>{movie.id}</h2>)
 }
