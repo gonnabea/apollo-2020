@@ -1,3 +1,18 @@
 import React from "react"
+import { gql } from "apollo-boost"
+import { useQuery } from "@apollo/react-hooks"
 
-export default () => <h1>Home</h1>
+const GET_MOVIES = gql`
+  {
+    movies(rating: 7, limit: 5) {
+      id
+      medium_cover_image
+    }
+  }
+`
+
+export default () => {
+  const { loading } = useQuery(GET_MOVIES)
+  console.log(loading)
+  return <h1>Home</h1>
+}
