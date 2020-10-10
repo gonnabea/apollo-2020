@@ -3,18 +3,9 @@ import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
 import styled from "styled-components"
 import Movie from "../components/Movie"
+import { Loader } from "../components/Loader"
 
-const Loader = styled.div`
-  width: 100vw;
-  height: 100vh;
-  font-size: 30px;
-  color: white;
-  box-shadow: 0 0 10px black;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+
 
 const Body = styled.div`
   width: 100vw;
@@ -52,7 +43,11 @@ const GET_MOVIES = gql`
   {
     movies(rating: 7, limit: 5) {
       id
+      title
       medium_cover_image
+      language
+      rating
+      description_full
     }
   }
 `
@@ -61,7 +56,7 @@ export default () => {
   const { loading, error, data } = useQuery(GET_MOVIES)
   console.log(loading, error, data)
   return loading ? (
-    <Loader>로딩중...</Loader>
+    <Loader text={"로딩중..."} /> 
   ) : (
     <Body>
       <Header>
@@ -70,7 +65,7 @@ export default () => {
       </Header>
       <Main>
         {data.movies.map((movie) => (
-          <Movie id={movie.id} />
+          <Movie id={movie.id} title={movie.title} />
         ))}
       </Main>
     </Body>

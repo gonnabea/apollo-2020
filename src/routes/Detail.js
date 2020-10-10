@@ -1,7 +1,11 @@
 import React from "react"
+import styled from "styled-components"
 import { useParams } from "react-router-dom"
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
+import { Loader } from "../components/Loader"
+
+
 
 const GET_MOVIE = gql`
   query movie($id: Int!) {
@@ -10,6 +14,8 @@ const GET_MOVIE = gql`
       id
       title
       medium_cover_image
+      language
+      rating
       description_full
     }
   }
@@ -22,7 +28,7 @@ export default () => {
   })
 
   if (loading) {
-    return "loading"
+    return <Loader text={"로딩중..."}/>
   }
   if (data && data.movie) {
     return data.movie[0].title
