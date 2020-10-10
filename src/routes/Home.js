@@ -46,9 +46,11 @@ const GET_MOVIES = gql`
       id
       title
       medium_cover_image
+      small_cover_image
       language
       rating
       description_full
+      isLiked @client # 클라이언트에서 추가한 api 요소
     }
   }
 `
@@ -66,9 +68,10 @@ export default () => {
       </Header>
       <Main>
         {data.movies.map((movie) => (
-          <Movie id={movie.id} title={movie.title} imgSrc={movie.medium_cover_image || movie.small_cover_image} />
+          <Movie id={movie.id} isLiked={movie.isLiked} title={movie.title} imgSrc={movie.medium_cover_image} />
         ))}
       </Main>
+      
     </Body>
   )
 }

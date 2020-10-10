@@ -13,12 +13,18 @@ const Title = styled.h1`
   margin-bottom: 10px;
 `
 
-export default ({ id,title,imgSrc }) => (
+const handleLike =() => {
+  
+}
+
+export default ({ id,title,imgSrc,isLiked }) => (
   <div>
     <Link to={`/${id}`}>
       <Poster src={imgSrc} />
       <Title>
       {title}
         </Title></Link>
+        <button onClick={handleLike}>{isLiked ? "unLike" : "Like"}</button>
+      {isLiked.toString()}
   </div>
 )
