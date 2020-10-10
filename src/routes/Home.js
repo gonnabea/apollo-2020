@@ -33,11 +33,12 @@ const HeaderDescription = styled.h3`
 `
 
 const Main = styled.main`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
   height: 60%;
 `
+
+
 
 const GET_MOVIES = gql`
   {
@@ -65,7 +66,7 @@ export default () => {
       </Header>
       <Main>
         {data.movies.map((movie) => (
-          <Movie id={movie.id} title={movie.title} />
+          <Movie id={movie.id} title={movie.title} imgSrc={movie.medium_cover_image || movie.small_cover_image} />
         ))}
       </Main>
     </Body>

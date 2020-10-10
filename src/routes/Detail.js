@@ -19,7 +19,11 @@ const Body = styled.section`
 `
 
 const MainArea = styled.main`
-  
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  padding: 40px;
 `
 
 const Poster = styled.img`
@@ -28,7 +32,7 @@ height: 400px;
 margin-bottom: 10px;
 `
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 35px;
   margin-bottom: 10px;
 `
 
@@ -38,7 +42,9 @@ const Language = styled.h3`
 `
 
 const Description = styled.p`
-width: 300px;
+
+font-size: 20px;
+
 `
 
 const GET_MOVIE = gql`
