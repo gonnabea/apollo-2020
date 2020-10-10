@@ -7,7 +7,7 @@ import { Loader } from "../components/Loader"
 
 
 
-const Body = styled.div`
+const Body = styled.section`
   width: 100vw;
   height: 100vh;
 `
@@ -41,7 +41,7 @@ const Main = styled.main`
 
 const GET_MOVIES = gql`
   {
-    movies(rating: 7, limit: 5) {
+    movies(rating: 0, limit: 20) {
       id
       title
       medium_cover_image

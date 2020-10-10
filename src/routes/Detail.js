@@ -6,6 +6,40 @@ import { useQuery } from "@apollo/react-hooks"
 import { Loader } from "../components/Loader"
 
 
+const Body = styled.section`
+  width: 100vw;
+  height: 100vh;
+  background-color:#e7586a;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  color: white;
+  
+`
+
+const MainArea = styled.main`
+  
+`
+
+const Poster = styled.img`
+width: 300px;
+height: 400px;
+margin-bottom: 10px;
+`
+const Title = styled.h1`
+  font-size: 30px;
+  margin-bottom: 10px;
+`
+
+const Language = styled.h3`
+  margin-bottom: 10px;
+
+`
+
+const Description = styled.p`
+width: 300px;
+`
 
 const GET_MOVIE = gql`
   query movie($id: Int!) {
@@ -26,11 +60,21 @@ export default () => {
   const { loading, data } = useQuery(GET_MOVIE, {
     variables: { id: parseInt(id) },
   })
+  console.log(data) 
 
   if (loading) {
     return <Loader text={"로딩중..."}/>
   }
   if (data && data.movie) {
-    return data.movie[0].title
-  }
+    return <Body>
+      <MainArea>
+      <Poster src={data.movie[0].medium_cover_image} />
+      <Title>{data.movie[0].title}</Title>
+  <Language>{data.movie[0].language.toUpperCase()} - {"⭐ " + data.movie[0].rating}</Language>
+  <Description>{data.movie[0].description_full}</Description>
+      </MainArea>
+    </Body>
+  } else {
+    return <Title>영화가 없음</Title>
+   }
 }
