@@ -57,6 +57,7 @@ const GET_MOVIE = gql`
       language
       rating
       description_full
+      isLiked @client
     }
   }
 `
@@ -75,8 +76,8 @@ export default () => {
     return <Body>
       <MainArea>
       <Poster src={data.movie[0].medium_cover_image} />
-      <Title>{data.movie[0].title}</Title>
-  <Language>{data.movie[0].language.toUpperCase()} - {"⭐ " + data.movie[0].rating}</Language>
+  <Title>{data.movie[0].title}</Title>
+  <Language>{data.movie[0].isLiked ? "Liked" : "UnLiked"} {data.movie[0].language.toUpperCase()} - {"⭐ " + data.movie[0].rating}</Language>
   <Description>{data.movie[0].description_full}</Description>
       </MainArea>
     </Body>

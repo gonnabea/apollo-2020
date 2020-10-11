@@ -4,14 +4,7 @@ import { Link } from "react-router-dom"
 import { gql } from "apollo-boost"
 import { useMutation } from "@apollo/react-hooks"
 
-const LIKE_MOVIE = gql`
-mutation likeMovie($id: Int!){
-  likeMovie(id:$id) @client
-}
-# mutation unLikeMovie($id: Int!){
-#   unLikeMovie(id:$id) @client
-# }
-`
+
 
 const Poster = styled.img`
 width: 300px;
@@ -24,9 +17,18 @@ const Title = styled.h1`
   margin-bottom: 10px;
 `
 
+export const LIKE_MOVIE = gql`
+mutation likeMovie($id: Int!, $isLiked: Boolean!){
+  toggleLikeMovie(id:$id, isLiked: $isLiked) @client
+}
+# mutation unLikeMovie($id: Int!){
+#   unLikeMovie(id:$id) @client
+# }
+`
+
 
 export default ({ id,title,imgSrc,isLiked }) => {
-  const [likeMovie] = useMutation(LIKE_MOVIE, {variables: {id: parseInt(id)}})
+  const [toggleMovie] = useMutation(LIKE_MOVIE, {variables: {id: parseInt(id), isLiked}})
   // const [unLikeMovie] = useMutation(LIKE_MOVIE, {variables: {id: parseInt(id)}})
 
   return (
@@ -36,7 +38,7 @@ export default ({ id,title,imgSrc,isLiked }) => {
       <Title>
       {title}
         </Title></Link>
-        <button onClick={isLiked? null: likeMovie}>{isLiked ? "unLike" : "Like"}</button>
+        <button onClick={toggleMovie}>{isLiked ? "UnLike" : "Like"}</button>
   </div>
 )
 }
